@@ -1,0 +1,68 @@
+{
+  "name": "gbscanner",
+  "version": "0.1.0",
+  "description": "Local desktop app for barcode-based offering records",
+  "main": "src/main/index.js",
+  "author": "gbScanner",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "manual": "electron scripts/generate-user-manual.js",
+    "build": "npm run build:mac && npm run build:win",
+    "build:mac": "electron-builder --mac dmg",
+    "build:win": "electron-builder --win nsis --x64",
+    "pack": "electron-builder --dir"
+  },
+  "dependencies": {
+    "bwip-js": "^4.5.1",
+    "dayjs": "^1.11.13",
+    "exceljs": "^4.4.0",
+    "pdfkit": "^0.15.2"
+  },
+  "devDependencies": {
+    "electron": "^42.4.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.gbscanner.app",
+    "productName": "gbScanner",
+    "beforePack": "scripts/before-pack.js",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "src/vendor/node_modules",
+        "to": "vendor/node_modules"
+      }
+    ],
+    "mac": {
+      "icon": "icon.icns",
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "icon": "icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

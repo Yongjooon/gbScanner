@@ -1,0 +1,11 @@
+node_modules/
+dist/
+output/
+records/
+backups/
+docs/manual-data/
+build/icon.iconset/
+src/vendor/node_modules/
+config/
+*.log
+.DS_Store
